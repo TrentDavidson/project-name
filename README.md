@@ -1,2 +1,6 @@
-# project-name
-week 1 project
+# Adoption Website
+
+## User Story 
+AS A ____
+I WANT ___
+SO THAT ___

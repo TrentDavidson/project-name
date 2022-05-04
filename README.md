@@ -1,6 +1,6 @@
 # Adoption Website
 
 ## User Story 
-AS A ____
-I WANT ___
-SO THAT ___
+* AS A USER
+* I WANT TO ENTER A LOCATION
+* SO THAT I CAN VIEW THE WEATHER INFORMATION

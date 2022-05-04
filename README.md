@@ -1,4 +1,4 @@
-# Adoption Website
+# Weather API
 
 ## User Story 
 * AS A USER

@@ -7,21 +7,21 @@
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     <title>Weather</title>
 </head>
-<body class="bg-blue-400">
+<body class="bg-blue-500">
 <!--navigation-->
-<header class="flex flex-wrap justify-between items-center text-white font-semibold uppercase bg-blue-600 shadow- text-md sm:text-l md:text-md lg:text-l xl:text-xl">
+<header class=" text-white font-semibold uppercase bg-blue-600 shadow- text-md sm:text-l md:flex flex-wrap justify-between text-md lg:text-l xl:text-xl">
     <h1 class="text-2xl sm:text-4xl">
-    <a class="flex flex-wrap items-center p-6" href="/">Weather API</a></h1>
-     <nav>
-         <ul class="flex items-center flex-wrap p-6 ">
+    <a class="flex justify-center p-6 md:flex flex-wrap" href="/">Weather API</a></h1>
+     <nav class="flex justify-center text-center md:flex flex-wrap ">
+         <ul class="justify-between p-6 ">
              <li> 
-                 <a href="#about" class="m-3 hover:text-blue-300">About Us</a>
+                 <a href="#about" class="m-3 hover:text-blue-300 font-light md:font-medium ">About Us</a>
              </li>
              <li>
-                 <a href="#locator" class="m-3 hover:text-blue-300">Find Your Location</a>
+                 <a href="#locator" class="m-3 hover:text-blue-300 font-light md:font-medium">Find Your Location</a>
              </li>
              <li>
-                 <a href="#forecast" class="m-3 hover:text-blue-300">Weather Forecast</a>
+                 <a href="#forecast" class="m-3 hover:text-blue-300 font-light md:font-medium">Weather Forecast</a>
              </li>
          </ul>
      </nav>
@@ -41,19 +41,74 @@
 <!--end of hero-->
 
 <!--about section-->
-<div class="flex justify-center text-5xl text-white p-10"><h2>About Us</h2>
+<div class="flex justify-center text-5xl md:text-6xl text-white p-10"><h2>About Us</h2>
 </div>
 
 </div>
-<div class ="flex justify-evenly">
-    <div class="w-1/2 m-10">
+<div class ="flex-col justify-center sm:flex flex-wrap">
+    <div class="w-36 m-10 md:w-1/2">
         <img class="rounded-md" src="./assets/imgs/storm-team-.jpg">
     </div>
-    <div class="m-10 w-1/2">
-        <p class="text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam accusantium impedit quo incidunt labore fugiat iste, reprehenderit similique est. Expedita dolore ea animi omnis blanditiis quas commodi sint, veritatis doloribus tempore sed, ipsam laboriosam soluta, voluptate nulla laudantium voluptatum id accusamus? Totam laborum voluptatum consequuntur, nulla ullam unde rerum sint architecto? Neque itaque labore quasi officia fugiat nobis dolores, dolorum quos dignissimos facere molestias veniam nam molestiae maxime, sit ratione quo! Modi placeat dolore quisquam laborum, eveniet iusto! Quo blanditiis rerum dolorum autem accusantium accusamus magni debitis quod vitae, cupiditate sunt in numquam esse molestiae. Neque porro error laboriosam totam!.</p>
+    <div class="flex-col w-36 m-10 md:flex flex-wrap justify-between">
+        <p class="text-white md:w-1/2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam accusantium impedit quo incidunt labore fugiat iste, reprehenderit similique est. Expedita dolore ea animi omnis blanditiis quas commodi sint, veritatis doloribus tempore sed, ipsam laboriosam soluta, voluptate nulla laudantium voluptatum id accusamus? Totam laborum voluptatum consequuntur, nulla ullam unde rerum sint architecto? Neque itaque labore quasi officia fugiat nobis dolores, dolorum quos dignissimos facere molestias veniam nam molestiae maxime, sit ratione quo! Modi placeat dolore quisquam laborum, eveniet iusto! Quo blanditiis rerum dolorum autem accusantium accusamus magni debitis quod vitae, cupiditate sunt in numquam esse molestiae. Neque porro error laboriosam totam!.</p>
     </div>
 </div>
 
+<!--form-->
+<section class=" bg-blue-500 flex-col justify-center pt-7 pb-10">
+    <div class="m-10 ">
+        <h3 class="text-4xl text-center">Find your Location</h3>
+        <p class="text-center">fill out your information to get your 7 day forecast</p>
+        <form class="bg-gray-400 rounded-md m-5 p-16"> 
+            <label for="long">Enter Longitude:</label>
+            <input type="text" placeholder="Longitude"/>
+
+            <label for="lat">Enter Latitude:</label>
+            <input type="text" placeholder="Latitude"/>
+        </form>
+
+    </div>
+
+    <div class="border-gray-500 flex-col justify-center m-10">
+        <h3 class="text-4xl text-center">Your 7-Day Forecast</h3>
+        <p class="text-center">Your forecast bsaed on your location</p>
+
+    <div>
+        <div class="pt-5 text-center">
+            <h4>label 1</h4>
+            <h4>label 2</h4>
+            <h4>label 3</h4>
+        </div>
+    </div>
+</section>
+
+<footer class=" text-center flex-col justify-center bg-gray-300 p-10 items-center">
+    <div>
+        <img class="w-1/4" src="./public/img/storm-team-.jpg" alt="">
+        <h2 class="text-2xl pt-3">Contact Info</h2>
+        <address>
+            Email: info@weather.com
+        </address>
+        <address>Phone:555-555-5555
+        </address>
+    </div>
+   
+        <div>
+            <h2 class="text-2xl pt-3 pb-3">Site Map</h2>
+            <ul>
+              <li> <a href="#about">About Us</a>
+              </li>
+              <li> <a href="#locator">Find your location</a>
+              </li>
+              <li> <a href="#forecast">Weather Forecast</a>
+              </li>
+            
+            </ul>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
 
 </body>
 </html>

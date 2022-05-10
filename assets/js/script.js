@@ -1,26 +1,32 @@
 // recieves input from text box and sends to geoCoder
 var getCityName = function () {
-    var cityName = "stamford"
-    // var cityName = $("#").val()
-    cityGeoLocation(cityName)
-}
+    // grabs cityname from text box and hourly or daily option
+    var cityName = $("#city-name").val()
+    var forecastTime = $("#weather-time").val()
 
-// gets the city name and converts it into lat and long for weather api to read
-var cityGeoLocation = function (cityName) {
+    // converts city name into lat and long for weather api to read
     var apiGeo = "https://geocoding-api.open-meteo.com/v1/search?name=" + cityName + "&count=1"
     fetch(apiGeo)
     .then(response => response.json())
     .then(data => {
         // creates array with long, lat, and city name
         var location = {
-                longitude: data.results[0].longitude,
-                latitude: data.results[0].latitude,
-                city: data.results[0].name
-            };
-            // sends array to api
-            weatherDataHourly(location)
-        })
-};
+            longitude: data.results[0].longitude,
+            latitude: data.results[0].latitude,
+            city: data.results[0].name
+        };
+
+        // send location array to one of the weather funciton based on drop down option
+        if (forecastTime === "Daily") {
+            weatherDataDaily(location);
+        } else if (forecastTime === "Hourly") {
+            weatherDataHourly(location);
+        };
+    })
+    
+}
+
+
 
 // retreives daily information from api
 var weatherDataDaily = function(location) {
@@ -90,6 +96,8 @@ var weatherDataHourly = function(location) {
 }
 
 // gets city name from search box 
-getCityName();
-
+$("#submit").on('click', function(event) {
+    event.preventDefault();
+    getCityName();
+})
 

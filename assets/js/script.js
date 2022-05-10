@@ -1,21 +1,28 @@
-var apiUrlHourly = "https://api.open-meteo.com/v1/forecast?latitude=40.71&longitude=-74.01&hourly=temperature_2m,relativehumidity_2m,precipitation,weathercode,windspeed_10m,winddirection_10m&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timeformat=unixtime&timezone=America%2FNew_York"
-var cityName = "greenwich"
-var apiGeo = "https://geocoding-api.open-meteo.com/v1/search?name=" + cityName + "&count=1"
+// recieves input from text box and sends to geoCoder
+var getCityName = function () {
+    var cityName = "stamford"
+    // var cityName = $("#").val()
+    cityGeoLocation(cityName)
+}
 
-var cityGeoLocation = function () {
+// gets the city name and converts it into lat and long for weather api to read
+var cityGeoLocation = function (cityName) {
+    var apiGeo = "https://geocoding-api.open-meteo.com/v1/search?name=" + cityName + "&count=1"
     fetch(apiGeo)
-        .then(response => response.json())
-        .then(data => {
-            var location = {
+    .then(response => response.json())
+    .then(data => {
+        // creates array with long, lat, and city name
+        var location = {
                 longitude: data.results[0].longitude,
                 latitude: data.results[0].latitude,
                 city: data.results[0].name
             };
-            
-            weatherDataDaily(location)
+            // sends array to api
+            weatherDataHourly(location)
         })
 };
 
+// retreives daily information from api
 var weatherDataDaily = function(location) {
     console.log(location)
     var longitude = location.longitude
@@ -58,7 +65,11 @@ var weatherDataDaily = function(location) {
         }) 
 }
 
-var weatherDataHourly = function() {
+// retrieves hourly information from api
+var weatherDataHourly = function(location) {
+    var longitude = location.longitude
+    var latitude = location.latitude
+    var apiUrlHourly = "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" + longitude + "&hourly=temperature_2m,relativehumidity_2m,precipitation,weathercode,windspeed_10m,winddirection_10m&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York"
     fetch(apiUrlHourly)
         .then(response => response.json())
         .then(data => {
@@ -72,8 +83,7 @@ var weatherDataHourly = function() {
         })
 }
 
-// calls daily weatherData function (geocode will call later and enter the long and lat)
-// weatherDataHourly();
-cityGeoLocation();
+// gets city name from search box 
+getCityName();
 
 

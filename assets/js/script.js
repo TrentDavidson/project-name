@@ -10,7 +10,7 @@ var getCityName = function () {
     .then(response => response.json())
     .then(data => {
         // creates array with long, lat, and city name
-        var location = {
+        window.locationData = {
             longitude: data.results[0].longitude,
             latitude: data.results[0].latitude,
             city: data.results[0].name
@@ -18,9 +18,9 @@ var getCityName = function () {
 
         // send location array to one of the weather funciton based on drop down option
         if (forecastTime === "Daily") {
-            weatherDataDaily(location);
+            weatherDataDaily(locationData);
         } else if (forecastTime === "Hourly") {
-            weatherDataHourly(location);
+            weatherDataHourly(locationData);
         };
     })
     
@@ -29,9 +29,9 @@ var getCityName = function () {
 
 
 // retreives daily information from api
-var weatherDataDaily = function(location) {
-    var longitude = location.longitude
-    var latitude = location.latitude
+var weatherDataDaily = function(locationData) {
+    var longitude = locationData.longitude
+    var latitude = locationData.latitude
     var apiUrlDaily = "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" + longitude + "&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,precipitation_hours,windspeed_10m_max&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York"
 
     // retrieves data from apiUrl
@@ -40,7 +40,15 @@ var weatherDataDaily = function(location) {
         .then(data => {
             // logs available data
             console.log(data)  
+            
+            // empty container to avoid duplication
+            $("#container").empty();
 
+            // change "your 7 day forecast" to the cities name
+            var weatherCityTitle = $("#weather-title")
+            weatherCityTitle.text(window.locationData.city + "'s 7 Day Forecast")
+
+            // display locations weather data
             for (var i = 0; i < 7; i++) {
 
                 // sets variables for weather data
@@ -66,14 +74,42 @@ var weatherDataDaily = function(location) {
 
                 // date , average temp, wind speed , sunrise to sunset 
                 console.log(date + " ", averageTemp + ", " + windSpeed + ", ", sunrise + " -> " + sunset);
+                console.log(moment(data.daily.time[i]))
+
+                // create html elements 
+                var container = $("#container");
+                var article = $("<article>")
+                    .addClass("bg-gray-300 flex flex-wrap justify-between rounded-md shadow-lg m-5 pb-1 w-1/2")
+                var textContainer = $("<div>")    
+                    .addClass("text-center")
+                var cardContainer = $("<div>")
+                // var img = 
+                var infoContainer = $("<div>")
+                var dateEl = $("<h4>")
+                    .addClass("p-2 text-xl")
+                    .text(date)
+                var tempEl = $("<h4>")
+                    .addClass("p-2")
+                    .text(averageTemp)
+                var windEl = $("<h4>")
+                    .addClass("p-2")
+                    .text(windSpeed)
+                
+                // appends created html elements
+
+                container.append(article);
+                article.append(textContainer);
+                textContainer.append(cardContainer);
+                cardContainer.append(infoContainer);
+                infoContainer.append(dateEl, tempEl, windEl);
             }
         }) 
 }
 
 // retrieves hourly information from api
-var weatherDataHourly = function(location) {
-    var longitude = location.longitude
-    var latitude = location.latitude
+var weatherDataHourly = function(locationData) {
+    var longitude = locationData.longitude
+    var latitude = locationData.latitude
     var apiUrlHourly = "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" + longitude + "&hourly=temperature_2m,relativehumidity_2m,precipitation,weathercode,windspeed_10m,winddirection_10m&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York"
     fetch(apiUrlHourly)
         .then(response => response.json())
@@ -96,8 +132,16 @@ var weatherDataHourly = function(location) {
 }
 
 // gets city name from search box 
-$("#submit").on('click', function(event) {
-    event.preventDefault();
-    getCityName();
+$("#search").on('click', function(event) {
+    event.preventDefault();    
+    // checks if city name was entered
+    var text = $("#city-name").val();
+    if (text === "") {
+        $("#city-name").attr("placeholder", "Please Enter City!");
+    } else {
+        getCityName();
+    }
+    
+    
 })
 

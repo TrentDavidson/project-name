@@ -24,7 +24,6 @@ var cityGeoLocation = function (cityName) {
 
 // retreives daily information from api
 var weatherDataDaily = function(location) {
-    console.log(location)
     var longitude = location.longitude
     var latitude = location.latitude
     var apiUrlDaily = "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" + longitude + "&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,precipitation_hours,windspeed_10m_max&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York"
@@ -74,12 +73,19 @@ var weatherDataHourly = function(location) {
         .then(response => response.json())
         .then(data => {
             console.log(data)
-            for (var i = 0; i < 6; i++) {
-                var unix = data.hourly.time[i]
-                var time = moment(unix);
-                console.log(time)
-                console.log(unix)
+            
+            for (var i = 0; i < 24; i++) {
+                var timeAr = data.hourly.time[i]
+                var currentTime = moment().format('YYYY-MM-DDTHH:00');
+                console.log(currentTime)
+                console.log(timeAr)
+                if (timeAr === currentTime) {
+                    console.log("EQUAL")
+                    var startIndex = i;
+                    break;
+                }
             }
+            console.log(startIndex)
         })
 }
 

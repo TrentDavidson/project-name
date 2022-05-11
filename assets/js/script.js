@@ -1,8 +1,8 @@
 // recieves input from text box and sends to geoCoder
-var getCityName = function () {
+var getCityName = function (searchInfo) {
     // grabs cityname from text box and hourly or daily option
-    var cityName = $("#city-name").val()
-    var forecastTime = $("#weather-time").val()
+    var cityName = searchInfo.city
+    var forecastTime = searchInfo.foreTime
 
     // converts city name into lat and long for weather api to read
     var apiGeo = "https://geocoding-api.open-meteo.com/v1/search?name=" + cityName + "&count=1"
@@ -233,6 +233,26 @@ var weatherDataHourly = function(locationData) {
         })
 }
 
+// saves last search and loads it when page loads
+var saveCurrentSearch = function (searchInfo) {
+    // clears previous save
+    localStorage.clear();
+
+    localStorage.setItem("city", searchInfo.city)
+    localStorage.setItem("timeVar", searchInfo.foreTime)
+}
+
+// if there is any data in localstorage then pass that info to getcityname() function
+var loadLastSearch = function() {
+    if (localStorage.length > 0) {
+        var searchInfo = {
+            city: localStorage.getItem("city"),
+            foreTime: localStorage.getItem("timeVar")
+        }
+        getCityName(searchInfo)
+    }
+};
+
 // gets city name from search box 
 $("#search").on('click', function(event) {
     event.preventDefault();    
@@ -241,7 +261,17 @@ $("#search").on('click', function(event) {
     if (text === "") {
         $("#city-name").attr("placeholder", "Please Enter City!");
     } else {
-        getCityName();
+        // grabs cityname from text box and hourly or daily option
+        var cityName = $("#city-name").val()
+        var forecastTime = $("#weather-time").val()
+        var searchInfo = {
+            city: cityName,
+            foreTime: forecastTime
+        }
+        getCityName(searchInfo);
+        saveCurrentSearch(searchInfo);
     }
 })
 
+// calls load search function everytime page is loaded
+loadLastSearch();

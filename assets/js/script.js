@@ -62,11 +62,8 @@ var weatherDataDaily = function(locationData) {
                 var windSpeed = data.daily.windspeed_10m_max[i] + "mp/h";
 
                 // sunrise and sunset times (24h time)
-                var sunriseSplit = data.daily.sunrise[i].split("T");
-                var sunrise = sunriseSplit[1];
-                var sunsetSplit = data.daily.sunset[i].split("T");
-                var sunset = sunsetSplit[1];
-
+                var sunrise = moment(data.daily.sunrise[i]).format("h:mm A");
+                var sunset = moment(data.daily.sunset[i]).format("h:mm A");
                 // gets date and formats it to MM/DD/YYYY
                 var dateUn = data.daily.time[i];
                 var dateAr = dateUn.split("-");
@@ -152,15 +149,32 @@ var weatherDataHourly = function(locationData) {
             for (var i = 0; i < 7; i++) {
 
                 // creates vars for hourly weather info
-                var timeSplit = data.hourly.time[x].split("T")
-                var time = timeSplit[1];
+                var time = moment(data.hourly.time[x]).format("h:mm A")
 
                 var temp = data.hourly.temperature_2m[x]
 
                 var humidity = data.hourly.relativehumidity_2m[x]
 
                 var windSpeed = data.hourly.windspeed_10m[x]
-                var windDirection = data.hourly.winddirection_10m[x]
+                // convert degrees to cardinal direction
+                var windDirDeg = data.hourly.winddirection_10m[x]
+                if (windDirDeg > 337.5 && windDirDeg < 361 || windDirDeg >= 0 && windDirDeg < 23) {
+                    windDirection = "N"
+                } else if (windDirDeg > 22 && windDirDeg < 68) {
+                    windDirection = "NE"
+                } else if (windDirDeg > 67 && windDirDeg < 113) {
+                    windDirection = "E"
+                } else if (windDirDeg > 112 && windDirDeg < 158) {
+                    windDirection = "SE"
+                } else if (windDirDeg > 157 && windDirDeg < 203) {
+                    windDirection = "S"
+                } else if (windDirDeg > 202 && windDirDeg < 248) {
+                    windDirection = "SW"
+                } else if (windDirDeg > 247 && windDirDeg < 293) {
+                    windDirection = "W"
+                }else if (windDirDeg > 292 && windDirDeg < 338) {
+                    windDirection = "NW"
+                }
 
                 // weather image based on weathercode
                 var weatherCode = data.hourly.weathercode[x]

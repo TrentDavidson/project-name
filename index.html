@@ -13,19 +13,17 @@
 <body class="bg-blue-500 font-poppins">
 <!--navigation-->
 <header class=" text-white font-semibold uppercase bg-blue-600 shadow- text-md sm:text-l md:flex flex-wrap justify-between text-md lg:text-l xl:text-xl">
-    
     <h1 class="text-3xl sm:text-5xl">
-    <a class="flex justify-center text-center p-6 md:flex flex-wrap" href="/">Weather API</a></h1>
+    <a class="flex justify-center text-center p-6 md:flex flex-wrap" href="/">Weather-I</a></h1>
      <nav class="flex justify-center md:flex md:flex-wrap ">
          <ul class="md:justify-between p-6 ">
              <li> 
                  <a href="#about" class="m-3 hover:text-blue-300 font-light flex flex-wrap text-center md:justify-between md:font-medium ">About Us</a>
              </li>
              <li>
-                 <a href="#locator" class="m-3 hover:text-blue-300 font-light flex flex-wrap text-center md:justify-between md:font-medium">Find Your Local Forecast</a>
+                 <a href="#locator" class="m-3 hover:text-blue-300 font-light flex flex-wrap text-center md:justify-between md:font-medium">Weather Forecast</a>
              </li>
              <li>
-                 <a href="#forecast" class="m-3 hover:text-blue-300 font-light flex flex-wrap text-center md:justify-between md:font-medium">Weather Forecast</a>
              </li>
          </ul>
      </nav>
@@ -37,21 +35,17 @@
     <div class="bg-blue-500 h-96 w-full relative -mb-10">
         <img src="./assets/imgs/hero image .jpg" class="object-cover"/>
         <div class="pl-24 pr-24 pt-24">
-            <h1 class="bg-blue-400 text-white text-4xl font-bold absolute top-0 mt-20 pl-2 pr-2 sm:text-center sm:text-5xl sm:justify-center font-poppins">Get Your Forecast</h1>
         </div>
     </div>
 </div>
 <!--end of hero-->
 
 <!--about section-->
-
-
 <section class="mt-4mb-10" id="about">
     <div class="justify-center text-center text-4xl md:text-5xl text-white p-10"><h2>About Us</h2>
     </div>
-
     <div class ="flex-col text-center sm:flex-col md:flex">
-        <div class="m-3 md:flex md:flex-wrap md:justify-between">
+        <div class="m-3 md:flex md:flex-wrap justify-center">
             <img class="rounded-md md:flex md:flex-wrap md:justify-between" src="./assets/imgs/storm-team-.jpg">
         </div>
         <div class= "m-10 md:flex md:flex-wrap md:justify-between">
@@ -63,8 +57,8 @@
 <!--form-->
 <section class=" bg-blue-500 flex justify-center pt-2 pb-2" id="locator">
     <div class="m-10 ">
-        <h3 class="text-4xl text-center text-white">Find Your Local Forecast</h3>
-        <p class="text-center text-white">Enter your city to get your 7-day forecast or hourly update.</p>
+        <h3 class="text-4xl text-center text-white">Get the Forecast</h3>
+        <p class="text-center text-white">Enter a city to get a 6-day forecast or 8-hour forecast.</p>
         <form class="justify-center bg-gray-400 rounded-md m-5 p-4 shadow-lg flex w-full"> 
             <div class="text-center">
                 <label class="mr-1" for="city">Enter City:</label>
@@ -81,10 +75,10 @@
     </div>
 </section>
 
-
+<!-- forecast cards header -->
 <div class="border-gray-500 flex-col justify-center m-10" id="forecast">
-    <h3 class="text-4xl text-center text-white" id="weather-title">Your 7-Day Forecast</h3>
-    <p class="text-center text-white">Your forecast based on your location.</p>
+    <h3 class="text-4xl text-center text-white" id="weather-title">Your Forecast</h3>
+    <p class="text-center text-white">The forecast based on your requested location.</p>
 </div>
 <!--weather cards-->
  <section class= "flex flex-wrap justify-center pb-10" id="container"> 
@@ -106,11 +100,8 @@
             <ul>
               <li> <a href="#about">About Us</a>
               </li>
-              <li> <a href="#locator">Find your location</a>
+              <li> <a href="#locator">Weather Forecast</a>
               </li>
-              <li> <a href="#forecast">Weather Forecast</a>
-              </li>
-            
             </ul>
         </div>
     </div>

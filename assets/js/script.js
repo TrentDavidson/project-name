@@ -36,13 +36,12 @@ var weatherDataDaily = function(locationData) {
         .then(data => {            
             // empty container to avoid duplication
             $("#container").empty();
-
             // change "your 7 day forecast" to the cities name
             var weatherCityTitle = $("#weather-title")
-            weatherCityTitle.text(window.locationData.city + "'s 7 Day Forecast")
+            weatherCityTitle.text(window.locationData.city + "'s 6 Day Forecast")
 
             // display locations weather data
-            for (var i = 0; i < 7; i++) {
+            for (var i = 0; i < 6; i++) {
 
                 // sets variables for weather data
                 var maxTemp = data.daily.temperature_2m_max[i];

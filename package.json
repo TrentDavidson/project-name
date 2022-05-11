@@ -1,0 +1,23 @@
+{
+  "name": "project-name",
+  "version": "1.0.0",
+  "description": "## User Story  * AS A USER * I WANT TO ENTER A LOCATION * SO THAT I CAN VIEW THE WEATHER INFORMATION",
+  "main": "index.js",
+  "scripts": {
+    "build-css": "tailwindcss -i ./assets/css/style.css -o ./tailwind/output.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TrentDavidson/project-name.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TrentDavidson/project-name/issues"
+  },
+  "homepage": "https://github.com/TrentDavidson/project-name#readme",
+  "dependencies": {
+    "tailwindcss": "^3.0.24"
+  }
+}

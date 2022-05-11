@@ -15,7 +15,6 @@ var getCityName = function () {
             latitude: data.results[0].latitude,
             city: data.results[0].name
         };
-
         // send location array to one of the weather funciton based on drop down option
         if (forecastTime === "Daily") {
             weatherDataDaily(locationData);
@@ -23,10 +22,7 @@ var getCityName = function () {
             weatherDataHourly(locationData);
         };
     })
-    
 }
-
-
 
 // retreives daily information from api
 var weatherDataDaily = function(locationData) {
@@ -37,10 +33,7 @@ var weatherDataDaily = function(locationData) {
     // retrieves data from apiUrl
     fetch(apiUrlDaily)
         .then(response => response.json())
-        .then(data => {
-            // logs available data
-            console.log(data)  
-            
+        .then(data => {            
             // empty container to avoid duplication
             $("#container").empty();
 
@@ -64,9 +57,10 @@ var weatherDataDaily = function(locationData) {
                 // precipitation amount in inches
                 var precipitation = data.daily.precipitation_sum[i]
 
-                // sunrise and sunset times (24h time)
+                // sunrise and sunset times (12h time)
                 var sunrise = moment(data.daily.sunrise[i]).format("h:mm A");
                 var sunset = moment(data.daily.sunset[i]).format("h:mm A");
+
                 // gets date and formats it to MM/DD/YYYY
                 var dateUn = data.daily.time[i];
                 var dateAr = dateUn.split("-");
@@ -139,8 +133,11 @@ var weatherDataHourly = function(locationData) {
     fetch(apiUrlHourly)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
-            
+            // changes title above weather card
+            var weatherCityTitle = $("#weather-title")
+            weatherCityTitle.text(window.locationData.city + "'s 8 Hour Forecast")
+
+            // gets current time from array to start from there when listing data
             for (var i = 0; i < 24; i++) {
                 var timeAr = data.hourly.time[i]
                 var currentTime = moment().format('YYYY-MM-DDTHH:00');
@@ -148,20 +145,20 @@ var weatherDataHourly = function(locationData) {
                     var startIndex = i;
                     break;
                 }
-                
             }
+            // declares where loop should start inside array (based on current time)
             x = startIndex;
+
+            // empties container to prevent duplicating cards
             $("#container").empty();
-            for (var i = 0; i < 7; i++) {
 
-                // creates vars for hourly weather info
+            for (var i = 0; i < 8; i++) {
+                // creates time, temp, humidity, and windspeed variables for hourly weather info
                 var time = moment(data.hourly.time[x]).format("h:mm A")
-
                 var temp = data.hourly.temperature_2m[x]
-
                 var humidity = data.hourly.relativehumidity_2m[x]
-
                 var windSpeed = data.hourly.windspeed_10m[x]
+
                 // convert degrees to cardinal direction
                 var windDirDeg = data.hourly.winddirection_10m[x]
                 if (windDirDeg > 337.5 && windDirDeg < 361 || windDirDeg >= 0 && windDirDeg < 23) {
@@ -231,6 +228,7 @@ var weatherDataHourly = function(locationData) {
                 cardContainer.append(img, infoContainer);
                 infoContainer.append(timeEl, tempEl, humidityEl, windEl, windDirectionEl)
 
+                // moves to next object in array for loop
                 x = x + 1
             }
         })
@@ -246,7 +244,5 @@ $("#search").on('click', function(event) {
     } else {
         getCityName();
     }
-    
-    
 })
 

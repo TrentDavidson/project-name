@@ -61,6 +61,9 @@ var weatherDataDaily = function(locationData) {
                 // windspeed in mph
                 var windSpeed = data.daily.windspeed_10m_max[i] + "mp/h";
 
+                // precipitation amount in inches
+                var precipitation = data.daily.precipitation_sum[i]
+
                 // sunrise and sunset times (24h time)
                 var sunrise = moment(data.daily.sunrise[i]).format("h:mm A");
                 var sunset = moment(data.daily.sunset[i]).format("h:mm A");
@@ -108,6 +111,9 @@ var weatherDataDaily = function(locationData) {
                 var windEl = $("<h4>")
                     .addClass("p-2 text-left")
                     .text("Wind Speed: " + windSpeed)
+                var precipitationEl = $("<h4>")
+                    .addClass("p-2 text-left")
+                    .text("Precipitation: " + precipitation + " in");
                 var sunriseEl = $("<h4>")
                     .addClass("p-2 text-left")
                     .text("Sunrise: " + sunrise)
@@ -120,7 +126,7 @@ var weatherDataDaily = function(locationData) {
                 article.append(textContainer);
                 textContainer.append(cardContainer);
                 cardContainer.append(img, infoContainer);
-                infoContainer.append(dayEl, dateEl, tempEl, windEl, sunriseEl, sunsetEl);
+                infoContainer.append(dayEl, dateEl, tempEl, windEl, precipitationEl, sunriseEl, sunsetEl);
             }
         }) 
 }

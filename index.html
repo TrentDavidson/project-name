@@ -65,29 +65,29 @@
     <div class="m-10 ">
         <h3 class="text-4xl text-center text-white">Find Your Local Forecast</h3>
         <p class="text-center text-white">Enter your city to get your 7-day forecast or hourly update.</p>
-        <form class="bg-gray-400 rounded-md m-5 p-4 shadow-lg flex"> 
-            <div class="">
-                <label class="mr-2" for="city">Enter City:</label>
-                <input class="mr-10" type="text" placeholder="City" id="city-name"/>
+        <form class="bg-gray-400 rounded-md m-5 p-4 shadow-lg flex w-full"> 
+            <div class="text-center">
+                <label class="mr-1" for="city">Enter City:</label>
+                <input class="mr-1" type="text" placeholder="City" id="city-name"/>
+                <select id="weather-time">
+                    <option value="Daily">Daily</option>>
+                    <option value="Hourly">Hourly</option>>
+                </select>
                 <div>
-                    <label class="mr-2">Choose:</label>
-                    <select id="weather-time">
-                        <option value="Daily">Daily</option>>
-                        <option value="Hourly">Hourly</option>>
-                    </select>
-                    <button class="btn ml-4 bg-blue-600 text-white p-2 rounded" id="search">Search</button>
                 </div>
+                <button class="mt-4 btn bg-blue-600 text-white p-2 rounded" id="search">Search</button>
             </div>
         </form>
     </div>
 </section>
+
 
 <div class="border-gray-500 flex-col justify-center m-10" id="forecast">
     <h3 class="text-4xl text-center text-white" id="weather-title">Your 7-Day Forecast</h3>
     <p class="text-center text-white">Your forecast based on your location.</p>
 </div>
 <!--weather cards-->
- <section class= "flex pb-10" id="container"> 
+ <section class= "flex flex-wrap justify-center pb-10" id="container"> 
 </section>
 
 <!-- footer -->
@@ -121,3 +121,4 @@
 </body>
 
 </html>
+

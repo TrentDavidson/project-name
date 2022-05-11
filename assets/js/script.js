@@ -71,37 +71,59 @@ var weatherDataDaily = function(locationData) {
                 var dateUn = data.daily.time[i];
                 var dateAr = dateUn.split("-");
                 var date = dateAr[1] + "/" + dateAr[2] + "/" + dateAr[0];
-
-                // date , average temp, wind speed , sunrise to sunset 
-                console.log(date + " ", averageTemp + ", " + windSpeed + ", ", sunrise + " -> " + sunset);
-                console.log(moment(data.daily.time[i]))
+                var day = moment(data.daily.time[i]).format('dddd');
+                
+                // weather image based on weathercode
+                var weatherCode = data.daily.weathercode[i]
+                var weatherIconId = "";
+                if (weatherCode === 0) {
+                    weatherIconId = "sunny";
+                } else if (weatherCode > 0 && weatherCode < 4) {
+                    weatherIconId = "partly-cloudy";
+                } else if (weatherCode > 4 && weatherCode < 50) {
+                    weatherIconId = "cloudy";
+                } else if (weatherCode > 50) {
+                    weatherIconId = "rain";
+                }
+                var weatherIcon = "./assets/imgs/" + weatherIconId + ".png";
 
                 // create html elements 
                 var container = $("#container");
-                var article = $("<article>")
-                    .addClass("bg-gray-300 flex flex-wrap justify-between rounded-md shadow-lg m-5 pb-1 w-1/2")
+                var article = $("<div>")
+                    .addClass("bg-gray-300 flex flex-wrap justify-center rounded-md shadow-lg m-10 text-center w-1/6")
                 var textContainer = $("<div>")    
                     .addClass("text-center")
                 var cardContainer = $("<div>")
-                // var img = 
+                    .addClass("content-center")
+                var img = $("<img>")
+                    .addClass("m-auto rounded overflow-hidden h-48 w-full")
+                    .attr("src", weatherIcon)
                 var infoContainer = $("<div>")
+                var dayEl = $("<h4>")
+                    .addClass("text-xl")
+                    .text(day)
                 var dateEl = $("<h4>")
                     .addClass("p-2 text-xl")
                     .text(date)
                 var tempEl = $("<h4>")
-                    .addClass("p-2")
-                    .text(averageTemp)
+                    .addClass("p-2 text-left")
+                    .text("Temperature: " + averageTemp)
                 var windEl = $("<h4>")
-                    .addClass("p-2")
-                    .text(windSpeed)
-                
-                // appends created html elements
+                    .addClass("p-2 text-left")
+                    .text("Wind Speed: " + windSpeed)
+                var sunriseEl = $("<h4>")
+                    .addClass("p-2 text-left")
+                    .text("Sunrise: " + sunrise)
+                var sunsetEl = $("<h4>")
+                    .addClass("p-2 text-left")
+                    .text("Sunset: " + sunset)
 
+                // appends created html elements
                 container.append(article);
                 article.append(textContainer);
                 textContainer.append(cardContainer);
-                cardContainer.append(infoContainer);
-                infoContainer.append(dateEl, tempEl, windEl);
+                cardContainer.append(img, infoContainer);
+                infoContainer.append(dayEl, dateEl, tempEl, windEl, sunriseEl, sunsetEl);
             }
         }) 
 }
@@ -119,15 +141,78 @@ var weatherDataHourly = function(locationData) {
             for (var i = 0; i < 24; i++) {
                 var timeAr = data.hourly.time[i]
                 var currentTime = moment().format('YYYY-MM-DDTHH:00');
-                console.log(currentTime)
-                console.log(timeAr)
                 if (timeAr === currentTime) {
-                    console.log("EQUAL")
                     var startIndex = i;
                     break;
                 }
+                
             }
-            console.log(startIndex)
+            x = startIndex;
+            $("#container").empty();
+            for (var i = 0; i < 7; i++) {
+
+                // creates vars for hourly weather info
+                var timeSplit = data.hourly.time[x].split("T")
+                var time = timeSplit[1];
+
+                var temp = data.hourly.temperature_2m[x]
+
+                var humidity = data.hourly.relativehumidity_2m[x]
+
+                var windSpeed = data.hourly.windspeed_10m[x]
+                var windDirection = data.hourly.winddirection_10m[x]
+
+                // weather image based on weathercode
+                var weatherCode = data.hourly.weathercode[x]
+                var weatherIconId = "";
+                if (weatherCode === 0) {
+                    weatherIconId = "sunny";
+                } else if (weatherCode > 0 && weatherCode < 4) {
+                    weatherIconId = "partly-cloudy";
+                } else if (weatherCode > 4 && weatherCode < 50) {
+                    weatherIconId = "cloudy";
+                } else if (weatherCode > 50) {
+                    weatherIconId = "rain";
+                }
+                var weatherIcon = "./assets/imgs/" + weatherIconId + ".png";
+
+                // create html elements for data
+                var container = $("#container");
+                var article = $("<div>")
+                    .addClass("bg-gray-300 flex flex-wrap justify-center rounded-md shadow-lg m-10 text-center w-1/6")
+                var textContainer = $("<div>")    
+                    .addClass("text-center")
+                var cardContainer = $("<div>")
+                    .addClass("content-center")
+                var img = $("<img>")
+                    .addClass("m-auto rounded overflow-hidden h-48 w-full")
+                    .attr("src", weatherIcon)
+                var infoContainer = $("<div>")
+                var timeEl = $("<h4>")
+                    .addClass("p-2 text-xl")
+                    .text(time)
+                var tempEl = $("<h4>")
+                .addClass("p-2 text-left")
+                .text("Temperature: " + temp)
+                var humidityEl = $("<h4>")
+                    .addClass("p-2 text-left")
+                    .text("Humidity: " + humidity + "%")
+                var windEl = $("<h4>")
+                    .addClass("p-2 text-left")
+                    .text("Wind Speed: " + windSpeed + "mp/h")
+                var windDirectionEl = $("<h4>")
+                    .addClass("p-2 text-left")
+                    .text("Wind Direction: " + windDirection)
+
+                // appends created html elements
+                container.append(article);
+                article.append(textContainer);
+                textContainer.append(cardContainer);
+                cardContainer.append(img, infoContainer);
+                infoContainer.append(timeEl, tempEl, humidityEl, windEl, windDirectionEl)
+
+                x = x + 1
+            }
         })
 }
 

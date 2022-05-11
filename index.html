@@ -4,9 +4,112 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <title>weather-i</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
 </head>
-<body>
-    
+<body class="bg-blue-500">
+<!--navigation-->
+<header class=" text-white font-semibold bg-blue-600 shadow- text-md sm:text-l md:flex flex-wrap justify-between text-md lg:text-l xl:text-xl">
+    <h1 class="text-3xl sm:text-5xl">
+    <a class="flex justify-center text-center p-6 md:flex flex-wrap" href="/">weather-i</a></h1>
+     <nav class="flex justify-center md:flex md:flex-wrap ">
+         <ul class="md:justify-between p-6 ">
+             <li> 
+                 <a href="#about" class="m-3 hover:text-blue-300 font font-light flex flex-wrap text-center md:justify-between md:font-medium ">About Us</a>
+             </li>
+             <li>
+                 <a href="#locator" class="m-3 hover:text-blue-300 font-light flex flex-wrap text-center md:justify-between md:font-medium">Weather Forecast</a>
+             </li>
+             <li>
+             </li>
+         </ul>
+     </nav>
+ </header>
+<!--end of navigation-->
+
+<!--hero-->
+<div>
+    <div class="bg-blue-500 h-96 w-full relative -mb-10">
+        <img src="./assets/imgs/hero image .jpg" class="object-cover"/>
+        <div class="pl-24 pr-24 pt-24">
+        </div>
+    </div>
+</div>
+<!--end of hero-->
+
+<!--about section-->
+<section class="mt-4mb-10" id="about">
+    <div class="justify-center text-center text-4xl md:text-5xl text-white p-10"><h2>About Us</h2>
+    </div>
+    <div class ="flex-col text-center sm:flex-col md:flex">
+        <div class="m-3 md:flex md:flex-wrap justify-center">
+            <img class="rounded-md md:flex md:flex-wrap md:justify-between" src="./assets/imgs/storm-team-.jpg">
+        </div>
+        <div class= "m-10 md:flex md:flex-wrap md:justify-between">
+            <p class="text-white font-poppins">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam accusantium impedit quo incidunt labore fugiat iste, reprehenderit similique est. Expedita dolore ea animi omnis blanditiis quas commodi sint, veritatis doloribus tempore sed, ipsam laboriosam soluta, voluptate nulla laudantium voluptatum id accusamus? Totam laborum voluptatum consequuntur, nulla ullam unde rerum sint architecto? Neque itaque labore quasi officia fugiat nobis dolores, dolorum quos dignissimos facere molestias veniam nam molestiae maxime, sit ratione quo! Modi placeat dolore quisquam laborum, eveniet iusto! Quo blanditiis rerum dolorum autem accusantium accusamus magni debitis quod vitae, cupiditate sunt in numquam esse molestiae. Neque porro error laboriosam totam!.</p>
+        </div>
+    </div>
+</section>
+
+<!--form-->
+<section class=" bg-blue-500 flex justify-center pt-2 pb-2" id="locator">
+    <div class="m-10 ">
+        <h3 class="text-4xl text-center text-white">Get the Forecast</h3>
+        <p class="text-center text-white">Enter a city to get a 6-day forecast or 8-hour forecast.</p>
+        <form class="justify-center bg-gray-400 rounded-md m-5 p-4 shadow-lg flex w-full"> 
+            <div class="text-center">
+                <label class="mr-1" for="city">Enter City:</label>
+                <input class="mr-1" type="text" placeholder="City" id="city-name"/>
+                <select id="weather-time">
+                    <option value="Daily">Daily</option>>
+                    <option value="Hourly">Hourly</option>>
+                </select>
+                <div>
+                </div>
+                <button class="mt-4 btn bg-blue-600 text-white p-2 rounded" id="search">Search</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- forecast cards header -->
+<div class="border-gray-500 flex-col justify-center m-10" id="forecast">
+    <h3 class="text-4xl text-center text-white" id="weather-title">Your Forecast</h3>
+    <p class="text-center text-white">The forecast based on your requested location.</p>
+</div>
+<!--weather cards-->
+ <section class= "flex flex-wrap justify-center pb-10" id="container"> 
+</section>
+
+<!-- footer -->
+<footer class=" text-center flex-col justify-center bg-gray-300 p-10 items-center">
+    <div>
+        <h2 class="text-2xl pt-3">Contact Info</h2>
+        <address>
+            Email: info@weather.com
+        </address>
+        <address>Phone:555-555-5555
+        </address>
+    </div>
+   
+        <div>
+            <h2 class="text-2xl pt-3 pb-3">Site Map</h2>
+            <ul>
+              <li> <a href="#about">About Us</a>
+              </li>
+              <li> <a href="#locator">Weather Forecast</a>
+              </li>
+            </ul>
+        </div>
+    </div>
+</footer>
+<script src="https://momentjs.com/downloads/moment.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
+

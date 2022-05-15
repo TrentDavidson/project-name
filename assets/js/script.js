@@ -83,13 +83,11 @@ var weatherDataDaily = function(locationData) {
                 // create html elements 
                 var container = $("#container");
                 var article = $("<div>")
-                    .addClass("bg-gray-300 flex flex-wrap justify-center rounded-md shadow-lg m-10 text-center w-1/6")
-                var textContainer = $("<div>")    
-                    .addClass("text-center")
+                    .addClass("bg-white flex flex-wrap justify-center rounded-md shadow-lg m-5 text-center lg:w-1/4 md:w-1/3 sm:w-1/2 w-80")
                 var cardContainer = $("<div>")
                     .addClass("content-center")
                 var img = $("<img>")
-                    .addClass("m-auto rounded overflow-hidden h-48 w-full")
+                    .addClass("m-auto rounded h-64 w-64")
                     .attr("src", weatherIcon)
                 var infoContainer = $("<div>")
                 var dayEl = $("<h4>")
@@ -116,8 +114,7 @@ var weatherDataDaily = function(locationData) {
 
                 // appends created html elements
                 container.append(article);
-                article.append(textContainer);
-                textContainer.append(cardContainer);
+                article.append(cardContainer);
                 cardContainer.append(img, infoContainer);
                 infoContainer.append(dayEl, dateEl, tempEl, windEl, precipitationEl, sunriseEl, sunsetEl);
             }
@@ -195,13 +192,13 @@ var weatherDataHourly = function(locationData) {
                 // create html elements for data
                 var container = $("#container");
                 var article = $("<div>")
-                    .addClass("bg-gray-300 flex flex-wrap justify-center rounded-md shadow-lg m-10 text-center w-1/6")
+                    .addClass("bg-white flex flex-wrap justify-center rounded-md shadow-lg m-5 text-center lg:w-1/5 md:w-1/3 sm:w-2/3 w-2/3")
                 var textContainer = $("<div>")    
                     .addClass("text-center")
                 var cardContainer = $("<div>")
                     .addClass("content-center")
                 var img = $("<img>")
-                    .addClass("m-auto rounded overflow-hidden h-48 w-full")
+                    .addClass("m-auto rounded h-64 w-64")
                     .attr("src", weatherIcon)
                 var infoContainer = $("<div>")
                 var timeEl = $("<h4>")
